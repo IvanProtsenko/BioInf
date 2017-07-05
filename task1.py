@@ -4,7 +4,7 @@ def task(n):
     for a in range(n):
         if a % 5==0:
             s += a
-        if a % 3==0:
+        elif a % 3==0:
             s += a
     return s
     
