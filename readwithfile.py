@@ -31,8 +31,7 @@ def align(s, t):
             elif c>d and c>0:
                 x[i][j] = c
             elif d>0: x[i][j] = d
-            else: x[i][j] = 0
-            
+            else: x[i][j] = 0         
             if x[i][j]>l:
                 l = x[i][j]
                 u = i
@@ -41,7 +40,6 @@ def align(s, t):
     j = y
     sa = ""
     ta = ""
-
     while (x[i][j] != 0):
         if i>0 and j>0 and x[i-1][j-1] + Score(s[i-1],t[j-1]) == x[i][j]:
             sa = s[i-1] + sa
@@ -55,13 +53,12 @@ def align(s, t):
         if j>0 and x[i][j] == x[i][j-1] + Score('-', t[j-1]):
             ta = t[j-1] + ta
             sa = '-' + sa
-            j -= 1
-            
+            j -= 1           
     print (sa)
     print (ta)
-    
-    pprint(x)
-
+    print('\n')
+    return i  
+    #pprint(x)
 
 with open(r"C:\Users\Иванg\Downloads\small_ref.fa") as inp:
     first = True
@@ -73,12 +70,32 @@ with open(r"C:\Users\Иванg\Downloads\small_ref.fa") as inp:
             first = False
             continue
         ref += line.strip()
-
 print(ref)
 print(ref_name)
 
-
-with open(r"C:\Users\Иванg\Downloads\small.fastq") as inp:
-    for line in inp:
-        l=line.strip()
-        #print(line.strip())
+with open(r"C:\Users\Иванg\Downloads\output.txt", 'w') as out:
+    with open(r"C:\Users\Иванg\Downloads\small.fastq", 'r') as inp:
+        counter = 1
+        read_name = ''
+        read = ''
+        read_quality = ''
+        for line in inp:
+            if counter == 1:
+                read_name = line.strip()
+                counter += 1
+                continue
+            if counter == 2:
+                read = line.strip()
+                counter += 1
+                continue
+            if counter == 3:
+                counter += 1
+                continue
+            if counter == 4:
+                counter = 1
+                read_quality = line.strip()
+                res = align(ref, read)
+            print(read_name, ref_name, res, read, read_quality, sep='\t', file=out)
+        for line in inp: 
+            l=line.strip()
+    
