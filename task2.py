@@ -1,6 +1,9 @@
 def sl(n):
-    d = {a: a ** 2 for a in range(1, n)}
-    return d
+    d = dict()
+    for i in range(1, n):
+        d[i] = i**2
+    print(d)
+        
 
 
 
