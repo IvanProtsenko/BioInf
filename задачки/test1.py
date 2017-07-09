@@ -1,15 +1,17 @@
 def nat(n):
-    h = []
-    a = []
-    i = n
+    g = 0
     c = 1
-    a = n.strip(' ').split(',')
-    h = (''.join(a))
-    print(h)
-    for h in range(len(a)):
-        if h[-1] % 100 == h[-1] % 1000:
+    a = n
+    print(a)
+    for h in range(1, len(a)):
+        if a[h-1] == a[h]:
             c += 1
-    print(c)
+        elif c>g:
+            g = c
+            c = 1
+        else:
+            c = 1
+    print(c, g)
 nat(input())
     
 
