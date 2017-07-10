@@ -11,7 +11,7 @@ def nat(n):
             c = 1
         else:
             c = 1
-    print(c, g)
-nat(input())
+    print(g)
+nat(list(map(int, input().split(','))))
     
 
